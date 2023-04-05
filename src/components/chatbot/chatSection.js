@@ -15,7 +15,7 @@ const ChatSection=({ chatHistory }) => {
     return (
         <section className="flex-2/3 overflow-auto scrollbar-none pr-2">
             <ChatBubble
-                message="Hi, I'm a Gyandhan chatbot. How can I help you?"
+                message="Hi, I'm Gyandhan chatbot. How can I help you?"
                 sent={false}
             />
             {chatHistory?.map((item, index) => (

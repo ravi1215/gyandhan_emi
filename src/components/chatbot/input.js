@@ -79,7 +79,7 @@ const InputArea=({
                 }}
                 disabled={loading}
             />
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none z-30">
+            <div className="absolute inset-y-0 right-0 flex items-center pr-2">
                 <button
                     onClick={handleGenerate}
                     style={{
