@@ -13,9 +13,11 @@ const Calculator=({
         let rateOfInterest=annualInterestRate/12/100;
         let amount=Math.pow((1+rateOfInterest), tenure);
 
-        setEmiPerMonth(loanAmount*rateOfInterest*amount)/(amount-1);
-        setTotalPayment(emiPerMonth*120);
-        setTotalInterest(totalPayment-loanAmount);
+        const emi=(loanAmount*rateOfInterest*amount)/(amount-1);
+
+        setEmiPerMonth(emi.toFixed(2));
+        setTotalPayment((emi*tenure).toFixed(2));
+        setTotalInterest((emi*tenure-loanAmount).toFixed(2));
     };
 
     return (
@@ -42,10 +44,10 @@ const Calculator=({
                 {
                     (totalInterest!="")&&(totalPayment!="")&&(emiPerMonth!="")&&
                     (
-                        <div className="flex flex-col sm:flex-col">
-                            <p>Total Interest to be paid : {totalInterest}</p>
-                            <p>Total Payment to be made : {totalPayment}</p>
-                            <p>EMI per month : {emiPerMonth}</p>
+                        <div className="flex flex-col">
+                            <p>EMI per month : &#x20b9; {emiPerMonth}</p>
+                            <p>Total Interest to be paid : &#x20b9; {totalInterest}</p>
+                            <p>Total Payment to be made : &#x20b9; {totalPayment}</p>
                         </div>
                     )
                 }
