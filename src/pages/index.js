@@ -1,8 +1,18 @@
+import { useState } from "react";
 import Calculator from '@/components/calculator';
 import Chatbot from '@/components/chatbot';
 import Head from 'next/head';
 
 export default function Home() {
+
+  const [loanAmount, setLoanAmount]=useState("");
+  const [annualInterestRate, setAnnualInterestRate]=useState("");
+  const [tenure, setTenure]=useState("");
+
+  const [totalInterest, setTotalInterest]=useState("");
+  const [totalPayment, setTotalPayment]=useState("");
+  const [emiPerMonth, setEmiPerMonth]=useState("");
+
   return (
     <>
       <Head>
@@ -29,9 +39,28 @@ export default function Home() {
                     Chatbot to help you easily understand study abroad options and Education loans process.
                   </p>
                 </div>
-                <Calculator />
+                <Calculator
+                  loanAmount={loanAmount}
+                  annualInterestRate={annualInterestRate}
+                  tenure={tenure}
+                  totalInterest={totalInterest}
+                  totalPayment={totalPayment}
+                  emiPerMonth={emiPerMonth}
+                  setLoanAmount={setLoanAmount}
+                  setAnnualInterestRate={setAnnualInterestRate}
+                  setTenure={setTenure}
+                  setTotalInterest={setTotalInterest}
+                  setTotalPayment={setTotalPayment}
+                  setEmiPerMonth={setEmiPerMonth}
+                />
               </div>
-              <Chatbot />
+              <Chatbot
+                loanAmount={loanAmount}
+                annualInterestRate={annualInterestRate}
+                tenure={tenure}
+                totalInterest={totalInterest}
+                totalPayment={totalPayment}
+                emiPerMonth={emiPerMonth} />
             </div>
           </div>
         </div>

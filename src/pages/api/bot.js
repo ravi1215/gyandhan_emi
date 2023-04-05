@@ -11,7 +11,7 @@ const handler=async (req, res) => {
                     content: req.body.chatHistory[i].message,
                 });
             }
-            const response=await getChatGPTResponse(chatHistory);
+            const response=await getChatGPTResponse(chatHistory, req.body.loanData);
             res.status(200).json({ message: response });
         }
         else {

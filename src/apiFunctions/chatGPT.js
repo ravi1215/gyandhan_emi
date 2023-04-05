@@ -12,7 +12,7 @@ Made By: Team of college students from NSUT (they used chatGPT API)`;
 
 const chatGPTRoleAcknowledgeMent=`Hello! I'm Gyandhan Chatbot, your friendly AI ChatBot. How can I assist you today?`;
 
-const getChatGPTPrompt=(chatHistory) => {
+const getChatGPTPrompt=(chatHistory, loanData) => {
 
     let prompt='';
     let finalChatHistory=chatHistory;
@@ -32,15 +32,23 @@ const getChatGPTPrompt=(chatHistory) => {
         },
         {
             role: 'assistant', content: chatGPTRoleAcknowledgeMent
-        },
-        ...finalChatHistory,
+        }
     ];
 
-    return chatGPTPrompt;
+    if (loanData.loanAmount&&loanData.tenure&&loanData.annualInterestRate&&loanData.emiPerMonth&&loanData.totalInterest&&loanData.totalPayment) {
+        chatGPTPrompt.push({
+            role: 'user', content: `Calculate my EMI for loan amount=${loanData.loanAmount}, loan tenure(number of months)=${loanData.tenure} and annual interest rate=${loanData.annualInterestRate}.`
+        });
+        chatGPTPrompt.push({
+            role: 'assistant', content: `EMI per month is ${loanData.emiPerMonth}, total interest to be paid is ${loanData.totalInterest} and total payment to be made is ${loanData.totalPayment}.`
+        });
+    }
+
+    return [...chatGPTPrompt, ...finalChatHistory];
 }
 
-const getChatGPTResponse=async (prompt) => {
-    const chatGPTPrompt=getChatGPTPrompt(prompt);
+const getChatGPTResponse=async (prompt, loanData) => {
+    const chatGPTPrompt=getChatGPTPrompt(prompt, loanData);
     try {
         const response=await openai.createChatCompletion({
             model: "gpt-3.5-turbo",

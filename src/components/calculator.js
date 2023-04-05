@@ -1,35 +1,25 @@
-import { useState } from "react";
 import InputBox from "./inputbox";
 
-const Calculator=() => {
-
-    const [loanAmount, setLoanAmount]=useState("");
-    const [annualInterestRate, setAnnualInterestRate]=useState("");
-    const [tenure, setTenure]=useState("");
-
-    const [totalInterest, setTotalInterest]=useState("");
-    const [totalPayment, setTotalPayment]=useState("");
-    const [emiPerMonth, setEmiPerMonth]=useState("");
+const Calculator=({
+    loanAmount, setLoanAmount,
+    annualInterestRate, setAnnualInterestRate,
+    tenure, setTenure,
+    totalInterest, setTotalInterest,
+    totalPayment, setTotalPayment,
+    emiPerMonth, setEmiPerMonth
+}) => {
 
     const calculate=() => {
-        // loanAmount = loanAmount*100000;
-        let r = annualInterestRate/12/100;
-        // console.log(r);
-        
-        let x = Math.pow((1+r),tenure);
-        // console.log(x);
-        
-        let emiPerMonth = (loanAmount*r*x)/(x-1);
-        // console.log(emi);
-        
-        let totalPayment = emiPerMonth*120;
-        let totalInterest = totalPayment - loanAmount;
-        console.log(totalPayment, totalInterest,emiPerMonth);
+        let rateOfInterest=annualInterestRate/12/100;
+        let amount=Math.pow((1+rateOfInterest), tenure);
+
+        setEmiPerMonth(loanAmount*rateOfInterest*amount)/(amount-1);
+        setTotalPayment(emiPerMonth*120);
+        setTotalInterest(totalPayment-loanAmount);
     };
 
     return (
         <div className="border-2 rounded-lg p-5">
-            {/* <h1>Calculator</h1> */}
             <div className="flex flex-col gap-5 items-center">
                 <div className="flex flex-col gap-5 sm:flex-row">
                     <InputBox value={loanAmount} placeholder={"Enter loan amount"} onChange={

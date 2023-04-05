@@ -1,7 +1,18 @@
 import axios from "axios";
 import { useState } from "react";
 
-const InputArea=({ input, setInput, chatHistory, setChatHistory }) => {
+const InputArea=({
+    input,
+    setInput,
+    chatHistory,
+    setChatHistory,
+    loanAmount,
+    annualInterestRate,
+    tenure,
+    totalInterest,
+    totalPayment,
+    emiPerMonth
+}) => {
 
     const [loading, setLoading]=useState(false);
 
@@ -9,7 +20,15 @@ const InputArea=({ input, setInput, chatHistory, setChatHistory }) => {
         try {
             setLoading(true);
             const response=await axios.post("/api/bot", {
-                chatHistory: [...chatHistory, { message: input, sent: true }]
+                chatHistory: [...chatHistory, { message: input, sent: true }],
+                loanData: {
+                    loanAmount: loanAmount,
+                    annualInterestRate: annualInterestRate,
+                    tenure: tenure,
+                    totalInterest: totalInterest,
+                    totalPayment: totalPayment,
+                    emiPerMonth: emiPerMonth
+                }
             });
             setChatHistory([
                 ...chatHistory,
@@ -44,7 +63,7 @@ const InputArea=({ input, setInput, chatHistory, setChatHistory }) => {
     };
 
     return (
-        <div className="relative rounded-md shadow-sm flex-1/3">
+        <div className="fixed bottom-0 relative rounded-md shadow-sm flex-1/3">
             <input
                 type="text"
                 name="input"
