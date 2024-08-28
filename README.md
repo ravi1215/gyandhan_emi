@@ -1,6 +1,6 @@
 # Gyandhan Chatbot
 
-Chatbot to help you easily understand study abroad options and Education loans process.
+Chatbot to help you easily understand study abroad options and Education loans process across various platforms.
 
 ## Getting Started
 
